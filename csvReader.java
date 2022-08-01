@@ -3,9 +3,13 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 class BakeryDetails
 {    
       String bakeryName;
@@ -53,28 +57,17 @@ class BakeryDetails
 	{
 		this.date=date;
 	}
-
-public void aggregation()
-{
-  
-    //   int orangeCakeCount = Integer.parseInt(orangCake);
-    //   int mangoCakeCount =Integer.parseInt(mangoCake); 
-    //   int strawberryCakeCount =Integer.parseInt(strawberryCake);
-    //   int totalCount = orangeCakeCount+mangoCakeCount+strawberryCakeCount;
-    //   System.out.println(totalCount);
-    
-}
 }
 public class csvReader
 {
 
     public static void main(String [] args) throws FileNotFoundException
     {
-        BakeryDetails bakery= new BakeryDetails();
-        bakery.aggregation();
         List<BakeryDetails> bakeryDetails= new ArrayList<>();
         List<String[]>rowData= new ArrayList<String[]>();
         List<String[]>header=new ArrayList<String[]>();
+        List<String> uniquenames=new ArrayList<String>();
+     //   List<HashMap<String,String>>hashMaps = new HashMap<String,String>();
         File file = new File("/home/surya/test.csv");
         Scanner sc = new Scanner(file);
         int linecount=1;
@@ -99,9 +92,12 @@ public class csvReader
             }
             linecount++;
         }
+        //MAPING THE VALUES YO HASHMAP//
+        
         for(String [] tempString : rowData)
         {
             BakeryDetails bakeryDtls=new BakeryDetails();
+            uniquenames.add(tempString[0]);
             bakeryDtls.setbakeryName(tempString[0]);
             bakeryDtls.setorangCake(tempString[1]);
             bakeryDtls.setmangoCake(tempString[2]);
@@ -109,23 +105,14 @@ public class csvReader
             bakeryDtls.setdate(tempString[4]);
             bakeryDetails.add(bakeryDtls);
         }
-        for(String [] temp:bakeryDetails)
-        {
-           System.out.println("Which Bakery Aggerigation Do You Want?\n1 For Winners Bakery\n2 For Iyyangar Bakery\n3 For A2B Snacks");
-           int entry = sc.nextInt();
-           if(entry==1)
-           {
-              if(temp[0].equals("Winners Bakery"))
-               {
-                  System.out.println("hi");
-               }
-              else 
-               {
-                 System.out.println("bye");
-               }
-           } 
-        }
-       
+        //DUPULICATE NAMES ARE REMOVED//
+        Set<String>bakerynames= new HashSet<String>();
+        for(String names : uniquenames)
+          {
+            bakerynames.add(names);
+          }
+          List<String>sortednames=new ArrayList<String>(bakerynames);
+          System.out.println(sortednames);
     sc.close();
     }
 }
