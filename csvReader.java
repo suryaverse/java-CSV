@@ -17,61 +17,59 @@ class BakeryDetails
       String mangoCake;
       String strawberryCake;
       String date;
-    public String getBakery()
-	{
-		return bakeryName;
-	}
-	public void setbakeryName(String bakeryName)
-	{
-		this.bakeryName=bakeryName;
-	}
-	public String getmangoCake()
-	{
-		return mangoCake;
-	}
-	public void setmangoCake(String mangoCake)
-	{
-		this.mangoCake=mangoCake;
-	}
-	public String getorangCake()
-	{
-		return orangCake;
-	}
-	public void setorangCake(String orangCake)
-	{
-		this.orangCake=orangCake;
-	}
-	public String getstrawberryCake()
-	{
-		return strawberryCake;
-	}
-	public void setstrawberryCake(String strawberryCake)
-	{
-		this.strawberryCake=strawberryCake;
-	}
-	public String getdate()
-	{
-		return date;
-	}
-	public void setdate(String date)
-	{
-		this.date=date;
-	}
-}
+      public String getBakery()
+	     {
+		    return bakeryName;
+    	 }
+	    public void setbakeryName(String bakeryName)
+	     {
+		    this.bakeryName=bakeryName;
+       }
+    	public String getmangoCake()
+	     {
+	      return mangoCake;
+       }
+	    public void setmangoCake(String mangoCake)
+	     {
+	     	this.mangoCake=mangoCake;
+       }
+	    public String getorangCake()
+	     {
+		    return orangCake;
+	     }
+	    public void setorangCake(String orangCake)
+	     {
+		    this.orangCake=orangCake;
+	     }
+	    public String getstrawberryCake()
+	     {
+		    return strawberryCake;
+	     }
+	    public void setstrawberryCake(String strawberryCake)
+	     {
+		    this.strawberryCake=strawberryCake;
+	     }
+	    public String getdate()
+	     {
+	  	  return date;
+	     }
+	    public void setdate(String date)
+	     {
+		    this.date=date;
+	     }
+  }
 public class csvReader
 {
-
     public static void main(String [] args) throws FileNotFoundException
     {
         List<BakeryDetails> bakeryDetails= new ArrayList<>();
         List<String[]>rowData= new ArrayList<String[]>();
         List<String[]>header=new ArrayList<String[]>();
         List<String> uniquenames=new ArrayList<String>();
-     //   List<HashMap<String,String>>hashMaps = new HashMap<String,String>();
         File file = new File("/home/surya/test.csv");
         Scanner sc = new Scanner(file);
         int linecount=1;
-        String row;
+        String row;      
         String [] csvData;
         String [] csvData1;
         String data;
@@ -91,19 +89,17 @@ public class csvReader
               rowData.add(csvData);
             }
             linecount++;
-        }
-        //MAPING THE VALUES YO HASHMAP//
-        
+        }System.out.println(linecount);
         for(String [] tempString : rowData)
         {
-            BakeryDetails bakeryDtls=new BakeryDetails();
+            BakeryDetails bakery=new BakeryDetails();
             uniquenames.add(tempString[0]);
-            bakeryDtls.setbakeryName(tempString[0]);
-            bakeryDtls.setorangCake(tempString[1]);
-            bakeryDtls.setmangoCake(tempString[2]);
-            bakeryDtls.setstrawberryCake(tempString[3]);
-            bakeryDtls.setdate(tempString[4]);
-            bakeryDetails.add(bakeryDtls);
+            bakery.setbakeryName(tempString[0]);
+            bakery.setorangCake(tempString[1]);
+            bakery.setmangoCake(tempString[2]);
+            bakery.setstrawberryCake(tempString[3]);
+            bakery.setdate(tempString[4]);
+            bakeryDetails.add(bakery);
         }
         //DUPULICATE NAMES ARE REMOVED//
         Set<String>bakerynames= new HashSet<String>();
@@ -111,8 +107,40 @@ public class csvReader
           {
             bakerynames.add(names);
           }
-          List<String>sortednames=new ArrayList<String>(bakerynames);
-          System.out.println(sortednames);
-    sc.close();
+        List<String>sortednames=new ArrayList<String>(bakerynames);  
+          //AGGREGATION//
+        for(int i=0;i<sortednames.size();i++)
+          {
+            int mangocount=0;
+            int orangecount=0;
+            int strawberrycount=0;
+            int mangoAvg=0;
+            int orangeAvg;
+            int strawberryAvg;
+            int count=0;
+             for(int j=0;j<bakeryDetails.size();j++)
+              {
+                if(sortednames.get(i).equals(bakeryDetails.get(j).getBakery()))
+                  {
+                    //TOTAL OF MANGO//
+                    mangocount=mangocount+Integer.parseInt(bakeryDetails.get(j).getmangoCake());
+                    //TOTAL OF ORANGE//
+                    orangecount=orangecount+Integer.parseInt(bakeryDetails.get(j).getorangCake());
+                    //TOTAL OF STRABERRY//
+                    strawberrycount=strawberrycount+Integer.parseInt(bakeryDetails.get(j).getstrawberryCake());
+                    count++;
+                  }
+              }
+                System.out.println("\n"+sortednames.get(i)+" Total Mango Cake Count is = "+mangocount);
+                mangoAvg=mangocount/count;
+                System.out.println("\n"+sortednames.get(i)+ " Average of Mango cake is = "+mangoAvg);
+                System.out.println("\n"+sortednames.get(i)+" Total Orange Cake Count is = "+orangecount);
+                orangeAvg=orangecount/count;
+                System.out.println("\n"+sortednames.get(i)+" Average of Orange cake is = "+orangeAvg);
+                System.out.println("\n"+sortednames.get(i)+" Total Strawberry Cake Count is = "+strawberrycount);
+                strawberryAvg=strawberrycount/count;
+                System.out.println("\n"+sortednames.get(i)+" Average of Strawberry Cake is = "+strawberryAvg);
+          }
+      sc.close();
     }
 }
