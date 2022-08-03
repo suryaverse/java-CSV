@@ -59,15 +59,9 @@ class BakeryDetails
 	     }
   }
 public class csvReader
-<<<<<<< HEAD
  {
     public static void main(String [] args) throws FileNotFoundException
       {
-=======
-{
-    public static void main(String [] args) throws FileNotFoundException
-    {
->>>>>>> c9f16fdb07c1b469e7a2a9361cd116e5ba6a38f9
         List<BakeryDetails> bakeryDetails= new ArrayList<>();
         List<String[]>rowData= new ArrayList<String[]>();
         List<String[]>header=new ArrayList<String[]>();
@@ -120,17 +114,11 @@ public class csvReader
             int mangocount=0;
             int orangecount=0;
             int strawberrycount=0;
-<<<<<<< HEAD
             float mangoAvg=0;
             float orangeAvg;
             float strawberryAvg;
             int maximumsale=0;
             int minimumsale=0;
-=======
-            int mangoAvg=0;
-            int orangeAvg;
-            int strawberryAvg;
->>>>>>> c9f16fdb07c1b469e7a2a9361cd116e5ba6a38f9
             int count=0;
              for(int j=0;j<bakeryDetails.size();j++)
               {
@@ -142,7 +130,6 @@ public class csvReader
                     orangecount=orangecount+Integer.parseInt(bakeryDetails.get(j).getorangCake());
                     //TOTAL OF STRABERRY//
                     strawberrycount=strawberrycount+Integer.parseInt(bakeryDetails.get(j).getstrawberryCake());
-<<<<<<< HEAD
                     //MAXIMUM SALE//
                     int tempMax=Integer.parseInt(bakeryDetails.get(j).getmangoCake())+Integer.parseInt(bakeryDetails.get(j).getorangCake())+Integer.parseInt(bakeryDetails.get(j).getstrawberryCake());
                     if(maximumsale < tempMax)
@@ -156,14 +143,11 @@ public class csvReader
                      {
                       minimumsale=tempMin;
                      }
-=======
->>>>>>> c9f16fdb07c1b469e7a2a9361cd116e5ba6a38f9
                     count++;
                   }
               }
                 System.out.println("\n"+sortednames.get(i)+" Total Mango Cake Count is = "+mangocount);
                 mangoAvg=mangocount/count;
-<<<<<<< HEAD
                 System.out.println(sortednames.get(i)+ " Average of Mango cake is = "+mangoAvg);
                 System.out.println(sortednames.get(i)+" Total Orange Cake Count is = "+orangecount);
                 orangeAvg=orangecount/count;
@@ -176,16 +160,4 @@ public class csvReader
           }
       sc.close();
      }
-=======
-                System.out.println("\n"+sortednames.get(i)+ " Average of Mango cake is = "+mangoAvg);
-                System.out.println("\n"+sortednames.get(i)+" Total Orange Cake Count is = "+orangecount);
-                orangeAvg=orangecount/count;
-                System.out.println("\n"+sortednames.get(i)+" Average of Orange cake is = "+orangeAvg);
-                System.out.println("\n"+sortednames.get(i)+" Total Strawberry Cake Count is = "+strawberrycount);
-                strawberryAvg=strawberrycount/count;
-                System.out.println("\n"+sortednames.get(i)+" Average of Strawberry Cake is = "+strawberryAvg);
-          }
-      sc.close();
-    }
->>>>>>> c9f16fdb07c1b469e7a2a9361cd116e5ba6a38f9
 }
